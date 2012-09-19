@@ -1,0 +1,78 @@
+<input type="hidden" id="reload_url_objecttypefields" value="/backend/ajax/objecttypefields/id/<?php echo $this->objecttype->getId(); ?>" />
+
+<h1>Velden voor type: <?php echo $this->objecttype->getName(); ?></h1>
+
+<?php if(count($this->used)){ ?>
+<p><?php t('USED_OBJECTTYPE_FIELDS'); ?></p>
+<table id="used_fields">
+	<thead>
+		<tr>
+		<th><?php t('TABLE_HEADER_DBNAME'); ?></th>
+		<th><?php t('TABLE_HEADER_LABEL'); ?></th>
+		<th><?php t('TABLE_HEADER_TYPE'); ?></th>
+		<th><?php t('TABLE_HEADER_ALTERNATE_BEHAVIOR'); ?></th>
+		<th><?php t('TABLE_HEADER_ACTION'); ?></th>
+		</tr>
+	</thead>
+	<tbody>
+<?php foreach($this->used as $used){
+  $meta = $used->getMetadata();
+  ?>
+<tr>
+			<td><?php echo $used->getDbName(); ?></td>
+			<td><?php echo $used->getLabel(); ?></td>
+			<td><?php echo $meta['type']; ?></td>
+			<td><?php echo $used->getAlternativeType(); ?></td>
+			<td><a href="#" ref="objecttype_<?php echo $this->objecttype->getId(); ?>" id="remove_<?php echo $used->getId(); ?>" class="remove_field_to_objecttype"><?php t('REMOVE'); ?></a></td>
+		</tr>
+<?php } ?>
+</tbody>
+</table>
+<?php } ?>
+<?php if(count($this->usable)){ ?>
+<p><?php t('USABLE_OBJECTTYPE_FIELDS'); ?></p>
+<table id="usable_fields">
+	<thead>
+		<tr>
+		<th><?php t('TABLE_HEADER_DBNAME'); ?></th>
+		<th><?php t('TABLE_HEADER_LABEL'); ?></th>
+		<th><?php t('TABLE_HEADER_TYPE'); ?></th>
+		<th><?php t('TABLE_HEADER_ALTERNATE_BEHAVIOR'); ?></th>
+		<th><?php t('TABLE_HEADER_ACTION'); ?></th>
+		</tr>
+	</thead>
+	<tbody>
+<?php
+$fieldsByType = jcms\FieldDefenitions::$fields;
+
+foreach($this->usable as $usable=>$usableType){ ?>
+<tr>
+            <td><?php echo $usable; ?></td>
+            <td><input type="text" name="label_<?php echo $usable; ?>"></td>
+			<td><?php echo $fieldsByType[$usable]; ?></td>
+			<td>
+			<select name="alt_type_<?php echo $usable; ?>" id="alt_type_<?php echo $usable; ?>">
+			<option value=""><?php t('SELECT_OPTION_DEFAULT_BEHAVIOR'); ?></option>
+			<?php foreach(jcms\FieldDefenitions::$alternateTypes as $alt=>$type){ ?>
+
+			<?php
+			echo strtolower($usable);
+			echo ' - ';
+			echo strtolower($usableType);
+			echo ' - ';
+			echo strtolower($type);
+
+			?>
+
+			  <?php if(strtolower($usableType) == strtolower($type)){ ?>
+                <option value="<?php echo $alt; ?>"><?php echo $alt; ?></option>
+              <?php } ?>
+			<?php } ?>
+			</select>
+			</td>
+			<td><a href="#" ref="objecttype_<?php echo $this->objecttype->getId(); ?>" id="add_<?php echo $usable; ?>" class="add_field_to_objecttype"><?php t('ADD'); ?></a></td>
+		</tr>
+<?php } ?>
+</tbody>
+</table>
+<?php } ?>

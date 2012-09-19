@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title><?php echo Zend_Registry::getInstance()->settings['site']['title']; ?> Backend</title>
+<link rel="stylesheet" href="/css/backend/jcms.css" type="text/css" media="screen, projection" />
+<link rel="stylesheet" href="/css/backend/login.css" type="text/css" media="screen" title="default" />
+<script type="text/javascript" src="/js/backend/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="/js/backend/jquery-ui-1.8.19.custom.min.js"></script>
+<script type="text/javascript" src="/js/backend/mouse.widget.coffee"></script>
+<script type="text/javascript" src="/js/backend/simple.widget.coffee"></script>
+<script type="text/javascript" src="/js/backend/tree.jquery.coffee"></script>
+<script type="text/javascript" src="/js/backend/tree.jquery.js"></script>
+<script type="text/javascript" src="/js/backend/jquery.qtip.min.js"></script>
+<script type="text/javascript" src="/js/backend/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="/js/backend/jcms.js"></script>
+</head>
+<body id="login-bg">
+<div id="login-holder">
+   <a href="index.html"><?php echo Zend_Registry::getInstance()->settings['site']['title']; ?> Backend</a>
+	<div class="clear"></div>
+	<div id="loginbox">
+	<div id="login-inner">
+		<?php echo $this->layout()->content; ?>
+	</div>
+	<div class="clear"></div>
+ </div>
+</div>
+</body>
+</html>

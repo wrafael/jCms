@@ -1,0 +1,29 @@
+<?php if(count($this->importedFiles)){ ?>
+<table>
+<tr><th><?php t('IMPORTED_FILES'); ?></th></tr>
+<?php
+foreach($this->importedFiles as $file){
+  echo "<tr><td>{$file}</td></tr>";
+}
+?>
+</table>
+<?php } ?>
+
+
+
+<?php if(count($this->files)){ ?>
+<form name="import_files" method="post">
+<table>
+<tr><th><?php t('AVAILABLE_FILES_TO_IMPORT'); ?></th><th><?php t('IMPORT_CHOICE'); ?></th></tr>
+<?php
+foreach($this->files as $file){
+  echo "<tr><td>{$file}</td><td><input type=\"checkbox\" name=\"importfiles[]\" value=\"{$file}\" /></td></tr>";
+}
+?>
+<tr><td><label for="parent_code"><?php t('IMPORT_FOLDER_CODE'); ?></label><input type="text" id="parent_code" name="parent_code" /></td><td><a href="#" id="import_all" ><?php t('SELECT_ALL'); ?></a></td></tr>
+<tr><td colspan="2"><input type="submit" value="<?php t('IMPORT_SELECTED_FILES'); ?>" /></td></tr>
+</table>
+</form>
+<?php }else{ ?>
+<?php t('NO_FILES_TO_IMPORT'); ?>
+<?php } ?>

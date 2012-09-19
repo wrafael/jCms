@@ -1,0 +1,3 @@
+#
+#RewriteRule !\.(js|ico|gif|jpg|png|css)$ index.php
+RewriteRule ^/(?!.*.(htm|js|ico|gif|jpg|coffee|png|css)$).*$ /index.php [L,NC]

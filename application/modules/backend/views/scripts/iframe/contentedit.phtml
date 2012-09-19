@@ -1,0 +1,49 @@
+<?php
+if(isset($this->info['savesuccess'])){
+  jcms\Translator::t('ITEM_SAVED');
+  ?>
+<script>
+    parent.updateTreeNewContent('<?php echo $this->info['parent_id'] ?>', '<?php echo $this->info['mode'] ?>', '<?php echo $this->info['sort'] ?>', '<?php echo $this->info['icon'] ?>', '<?php echo $this->info['label'] ?>', '<?php echo $this->info['content']->getId(); ?>', '<?php echo $this->info['permissions'] ?>', '<?php echo $this->info['title'] ?>');
+  </script>
+<?php
+}
+if(isset($this->info['savesuccessmessage'])){
+  echo $this->info['savesuccessmessage'];
+}
+?>
+<?php
+
+if(isset($this->info['objecttype'])){
+  switch($this->info['mode']){
+    case 'edit':
+        ?><p id="page_description"><?php jcms\Translator::t('EDIT_ITEM_OF_TYPE'); echo $this->info['objecttype']->getName(); ?></p><?php
+      break;
+    case 'add':
+        ?><p id="page_description"><?php jcms\Translator::t('NEW_ITEM_OF_TYPE'); echo $this->info['objecttype']->getName(); ?></p><?php
+      break;
+  }
+}
+
+echo $this->form;
+
+if($this->info['mode'] == 'add' && !isset($this->info['objecttype'])){
+  ?>
+<div id="addcontent_objecttype_choice_holder">
+<?php
+  foreach($this->objecttypes as $objecttype){
+    ?>
+      <div class="addcontent_objecttype_choice" id="objecttype_<?php echo $objecttype->getId(); ?>">
+		<img class="icon"
+			src="/img/backend/icons/<?php echo $objecttype->getIcon(); ?>"
+			alt="<?php echo $objecttype->getName(); ?>" />
+
+		<?php echo $objecttype->getName(); ?>
+		<p>
+		<?php echo $objecttype->getDescription(); ?>
+		</p>
+	</div>
+<?php
+  }
+  ?>
+</div>
+<?php } ?>

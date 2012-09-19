@@ -1,0 +1,16 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<head>
+<title>Error</title>
+</head>
+<body>
+<?php
+if(get_class($this->error) == 'ArrayObject'){
+  echo '<pre>';
+  echo $this->error['exception']->getMessage().'<br />';
+  var_dump($this->error['request']->getParams());
+  echo '</pre>';
+}else{ ?>
+<h1><?php echo jcms\ErrorHelper::getRandomQuote(); ?></h1>
+<p><?php echo $this->error; ?></p>
+<?php } ?>
+</body>

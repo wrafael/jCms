@@ -1,0 +1,5 @@
+<?php
+$c = Default_Model_Content::getInstanceByCode('DASHBOARD');
+if($c) echo $c->getContent();
+else echo "No item with code DASHBOARD found!";
+?>

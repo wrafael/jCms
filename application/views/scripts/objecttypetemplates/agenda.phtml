@@ -1,0 +1,9 @@
+<?php if($this->object){ ?>
+  <h1><?php echo $this->object->getTitle(); ?></h1>
+  <p><?php echo $this->object->getContent(); ?></p>
+  <p>Begin datum: <?php echo $this->object->getDatetime1('d-m-Y'); ?></p>
+  <p><?php if($this->object->getDatetime2()) echo 'Eind datum: '.$this->object->getDatetime2('d-m-Y'); ?></p>
+<?php }else{
+  t('NO_CONTENT_FOUND');
+}
+?>

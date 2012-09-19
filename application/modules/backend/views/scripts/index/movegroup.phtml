@@ -1,0 +1,31 @@
+<h1>Groepen verplaatsen</h1>
+<p>
+  Gebruik dit formulier om alle gebruikers van een bepaalde rol over te zetten op een andere rol of een rol te ontnemen. Deze actie is niet terug te draaien.
+</p>
+
+<form method="post" id="move_role" name="move_role">
+
+<select name="from_role">
+<?php foreach($this->roles as $role){ ?>
+  <option value="<?php echo $role->getId(); ?>"><?php echo $role->getName(); ?></option>
+<?php } ?>
+</select>
+
+
+<select name="to_role">
+  <option value="0"><?php t('REMOVE_FROM_GROUP'); ?></option>
+  <?php foreach($this->roles as $role){ ?>
+    <option value="<?php echo $role->getId(); ?>"><?php echo $role->getName(); ?></option>
+  <?php } ?>
+</select>
+<input type="submit" value="<?php t('SUBMIT'); ?>" />
+</form>
+<?php if(isset($this->changedUsers)){ ?>
+<h2>Zojuist aangepaste gebruikers</h2>
+<p>Van <?php echo $this->fromRole->getName(); ?> naar <?php echo $this->toRole->getName(); ?></p>
+<ul>
+<?php foreach($this->changedUsers as $user){ ?>
+  <li><?php echo $user->getUsername(); ?></li>
+<?php } ?>
+</ul>
+<?php } ?>

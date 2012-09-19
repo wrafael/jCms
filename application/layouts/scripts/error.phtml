@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title><?php echo Zend_Registry::getInstance()->settings['site']['title']; if($this->layout()->object) echo ' '.$this->layout()->object->getTitle(); ?></title>
+<script type="text/javascript" src="/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="/js/jquery.colorbox-min.js"></script>
+<link rel="stylesheet" href="/css/colorbox.css"></style>
+
+<style type="text/css">
+body {
+  color: #2a2c83;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  font-family: Helvetica;
+  font-size:11px;
+}
+a{
+  text-decoration: none;
+  color: #da1c5c;
+}
+a:hover, a.active{
+  text-shadow: 1px 1px 1px #bdbdbd;
+}
+a.menu{
+  font-size:15px;
+}
+h1, h2, h3{
+  font-weight: bold;
+  margin:0 0 5px 0;
+}
+h1{ font-size: 16px; }
+h2{ font-size: 14px; color:white;}
+h3{ font-size: 12px; }
+
+div#holder {
+  width: 900px;
+  margin: 0 auto 0 auto;
+}
+
+div#header {
+  margin:0 0 20px 0;
+  padding:0;
+  width: 100%;
+  height:265px;
+  background-image:url("/img/header.png");
+  position:relative;
+}
+
+ul#main-menu {
+  display:block;
+  position:relative;
+  margin:0 0 0 0;
+  padding:225px 0 0 0;
+  width: 100%;
+  font-weight: bold;
+}
+ul#main-menu li{
+  display:inline;
+  margin-right:20px;
+}
+ul#main-menu li a.color_1{ color:#56419c; }
+ul#main-menu li a.color_2{ color:#74b84b; }
+ul#main-menu li a.color_3{ color:#019444; }
+ul#main-menu li a.color_4{ color:#79d3f8; }
+ul#main-menu li a.color_5{ color:#56419c; }
+ul#main-menu li a.color_6{ color:#da1c5c; }
+ul#main-menu li a.color_7{ color:#b4e4fa; }
+ul#main-menu li a.color_8{ color:#d6df22; }
+ul#main-menu li a.color_9{ color:#f4f194; }
+ul#main-menu li a.color_10{ color:#f7941d; }
+}
+div.grouping {
+  width: 100%
+}
+
+div#submenu {
+  float: left;
+  width: 150px;
+  margin: 0;
+  padding: 0;
+}
+ul#sub-menu {
+  list-style: none;
+  display:block;
+  float: left;
+  width: 150px;
+  margin: 0;
+  padding: 0;
+  font-weight: bold;
+}
+ul#sub-menu li {
+  margin-bottom:10px;
+}
+div#content {
+  float: left;
+  padding: 0 35px 0 15px;
+}
+div#content.small{
+  width: 500px;
+}
+div#content.wide{
+  width: 650px;
+}
+div#sideblock {
+  float: left;
+  width: 180px;
+  background-color: #f77c1f;
+  padding:10px 10px 30px 10px;
+  background-position:bottom;
+  background-repeat: no-repeat;
+  background-image:url("/img/bar.png");
+}
+a.image_link img{
+  margin:5px;
+}
+textarea{
+  width:400px;
+  height:150px;
+}
+ul#news-list{
+  padding:0;
+  margin:0;
+}
+ul#news-list li{
+  list-style: none;
+  padding:0;
+  margin:0;
+  color:white;
+  font-size:10px;
+  font-style: italic;
+}
+ul#news-list li a {
+  font-size:15px;
+  color: #DA1C5C;
+  font-weight: bold;
+}
+</style>
+</head>
+<body>
+  <div id="holder">
+    <div id="header">
+      <ul id="main-menu">
+        <li><a class="menu color_1" href="/" title="home">home</a></li>
+      </ul>
+    </div>
+    <div class="grouping">
+    <?php echo $this->layout()->content ?>
+    </div>
+  </div>
+</body>
+</html>

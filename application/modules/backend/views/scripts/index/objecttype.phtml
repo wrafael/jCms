@@ -1,0 +1,22 @@
+<p>
+	<a href="/backend/index/objecttypeedit" title=""><?php t('ADD_NEW_OBJECTTYPE_LINK'); ?></a>&nbsp;<?php t('OR_SELECT_NEW_OBJECTTYPE'); ?>
+</p>
+<div id="objecttype_choice_holder">
+<?php
+foreach($this->objecttypes as $objecttype){
+  ?>
+<div class="objecttype_choice" id="objecttype_<?php echo $objecttype->getId(); ?>" ref="/backend/index/objecttypeedit/id/<?php echo $objecttype->getId(); ?>">
+
+		<img class="icon"
+			src="/img/backend/icons/<?php echo $objecttype->getIcon(); ?>"
+			alt="<?php echo $objecttype->getName(); ?>" />
+		<?php echo $objecttype->getName(); ?>
+		<p>
+		<?php echo $objecttype->getDescription(); ?>
+		</p>
+		<p><a href="#" ref="/backend/ajax/objecttypefields/id/<?php echo $objecttype->getId(); ?>" class="change_objecttype_fields" title="<?php t('ADJUST_FIELDS_LINK'); ?>"><?php t('ADJUST_FIELDS_LINK'); ?></a></p>
+	</div>
+<?php
+}
+?>
+</div>

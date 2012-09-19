@@ -1,0 +1,7 @@
+var tinyMCEImageList = new Array(
+<?php $counter = 1; ?>
+<?php foreach($this->files as $key=>$val){ ?>
+        ["<?php echo $val; ?>", "<?php echo $key; ?>"]
+        <?php if($counter != count($this->files)) echo ','; $counter++; ?>
+<?php } ?>
+);

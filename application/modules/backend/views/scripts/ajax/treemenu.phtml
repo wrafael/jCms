@@ -1,0 +1,34 @@
+<ul id="treemenu">
+<?php
+$id = $this->id;
+foreach ( $this->menu as $menu ) {
+	switch ($menu) {
+		case 'addchild' :
+			echo '<li class="' . $menu . '" id="' . $id . '">Content toevoegen</li>';
+			break;
+		case 'makefolder' :
+			echo '<li class="' . $menu . '" id="' . $id . '">Maak folder</li>';
+			break;
+		case 'makefile' :
+			echo '<li class="' . $menu . '" id="' . $id . '">Ontfolderen</li>';
+			break;
+		case 'remove' :
+			echo '<li class="' . $menu . '" id="' . $id . '">Content verwijderen</li>';
+			break;
+		case 'edit' :
+			echo '<li class="' . $menu . '" id="' . $id . '">Content bewerken</li>';
+			break;
+		case 'show' :
+			echo '<li class="' . $menu . '" id="' . $id . '">Content weergeven</li>';
+			break;
+		case 'copy' :
+			echo '<li class="' . $menu . '" id="' . $id . '">Kopieren</li>';
+			break;
+		case 'paste' :
+			echo '<li class="' . $menu . '" id="' . $id . '">Plakken</li>';
+			break;
+	}
+}
+?>
+</ul>
+

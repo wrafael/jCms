@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title><?php echo Zend_Registry::getInstance()->settings['site']['title']; if($this->layout()->object) echo ' '.$this->layout()->object->getTitle(); ?></title>
+<script type="text/javascript" src="/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="/js/jquery.colorbox-min.js"></script>
+<link rel="stylesheet" href="/css/colorbox.css"></style>
+<script type="text/javascript">
+$(document).ready(function(){
+	$(".slideshow").colorbox({rel:'slideshow', slideshow:true, photo: true, title:function(){return this.title + " - <a target=\"_new\" href=\""+this.rel+"\">Download originele afbeelding</a>";}});
+});
+</script>
+<style type="text/css">
+body {
+  color: #2a2c83;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  font-family: Helvetica;
+  font-size:11px;
+}
+a{
+  text-decoration: none;
+  color: #da1c5c;
+}
+a:hover, a.active{
+  text-shadow: 1px 1px 1px #bdbdbd;
+}
+a.menu{
+  font-size:15px;
+}
+h1, h2, h3{
+  font-weight: bold;
+  margin:0 0 5px 0;
+}
+h1{ font-size: 16px; }
+h2{ font-size: 14px; color:white;}
+h3{ font-size: 12px; }
+
+div#holder {
+  width: 900px;
+  margin: 0 auto 0 auto;
+}
+
+div#header {
+  margin:0 0 20px 0;
+  padding:0;
+  width: 100%;
+  height:265px;
+  background-image:url("/img/header.png");
+  position:relative;
+}
+
+ul#main-menu {
+  display:block;
+  position:relative;
+  margin:0 0 0 0;
+  padding:225px 0 0 0;
+  width: 100%;
+  font-weight: bold;
+}
+ul#main-menu li{
+  display:inline;
+  margin-right:20px;
+}
+ul#main-menu li a.color_1{ color:#56419c; }
+ul#main-menu li a.color_2{ color:#74b84b; }
+ul#main-menu li a.color_3{ color:#019444; }
+ul#main-menu li a.color_4{ color:#79d3f8; }
+ul#main-menu li a.color_5{ color:#56419c; }
+ul#main-menu li a.color_6{ color:#da1c5c; }
+ul#main-menu li a.color_7{ color:#b4e4fa; }
+ul#main-menu li a.color_8{ color:#d6df22; }
+ul#main-menu li a.color_9{ color:#f4f194; }
+ul#main-menu li a.color_10{ color:#f7941d; }
+}
+div.grouping {
+  width: 100%
+}
+
+div#submenu {
+  float: left;
+  width: 150px;
+  margin: 0;
+  padding: 0;
+}
+ul#sub-menu {
+  list-style: none;
+  display:block;
+  float: left;
+  width: 150px;
+  margin: 0;
+  padding: 0;
+  font-weight: bold;
+}
+ul#sub-menu li {
+  margin-bottom:10px;
+}
+div#content {
+  float: left;
+  padding: 0 35px 0 15px;
+}
+div#content.small{
+  width: 500px;
+}
+div#content.wide{
+  width: 650px;
+}
+div#sideblock {
+  float: left;
+  width: 180px;
+  background-color: #f77c1f;
+  padding:10px 10px 30px 10px;
+  background-position:bottom;
+  background-repeat: no-repeat;
+  background-image:url("/img/bar.png");
+}
+a.image_link img{
+  margin:5px;
+}
+textarea{
+  width:400px;
+  height:150px;
+}
+ul#news-list{
+  padding:0;
+  margin:0;
+}
+ul#news-list li{
+  list-style: none;
+  padding:0;
+  margin:0;
+  color:white;
+  font-size:10px;
+  font-style: italic;
+}
+ul#news-list li a {
+  font-size:15px;
+  color: #DA1C5C;
+  font-weight: bold;
+}
+ul#list li a{
+  font-size: 14px;
+}
+ul#list li span{
+  font-style: italic;
+  font-size: 10px;
+}
+</style>
+</head>
+<body>
+  <div id="holder">
+    <div id="header">
+      <ul id="main-menu">
+        <?php  $counter = 1; foreach($this->layout()->mainmenu as $menuItem){ ?>
+          <li><a class="menu color_<?php echo $counter++; ?> <?php if($this->layout()->activeMainmenuId == $menuItem->getId()){ ?>active<?php } ?>" href="<?php echo $menuItem->getUrl(); ?>" title="<?php echo $menuItem->getTitle(); ?>"><?php echo ucfirst(strtolower($menuItem->getTitle())); ?></a></li>
+        <?php } ?>
+
+        <?php if(is_null(Zend_Registry::getInstance()->session->user) || Zend_Registry::getInstance()->session->user->getUsername() == 'frontend_guest'){ ?>
+          <li><a class="menu color_<?php echo $counter++; ?>" href="/account/login" title="inloggen">inloggen</a></li>
+        <?php }else{ ?>
+          <li><a class="menu color_<?php echo $counter++; ?>" href="/account/logout" title="uitloggen">uitloggen</a></li>
+        <?php } ?>
+
+      </ul>
+    </div>
+    <div class="grouping">
+    <?php if($this->layout()->showsubmenu) {?>
+        <ul id="sub-menu">
+          <?php  foreach($this->layout()->submenu as $menuItem){ ?>
+          <li>
+             <a href="<?php echo $menuItem->getUrl(); ?>" class="<?php if($this->layout()->activeSubmenuId == $menuItem->getId()){ ?>active<?php } ?> menu" title="<?php echo $menuItem->getTitle(); ?>"><?php echo ucfirst(strtolower($menuItem->getTitle())); ?></a>
+          </li>
+          <?php } ?>
+        </ul>
+      <?php } ?>
+      <div id="content" <?php echo ($this->layout()->showsubmenu) ? 'class="small"' : 'class="wide"'; ?>><?php echo $this->layout()->content ?></div>
+      <?php if($this->layout()->news && count($this->layout()->news) > 0){ ?>
+        <div id="sideblock">
+          <h2>Nieuws</h2>
+          <ul id="news-list">
+          <?php foreach($this->layout()->news as $news){ ?>
+            <li>
+              <a href="<?php echo $news->getUrl(); ?>"><?php echo $news->getTitle(); ?></a> <?php echo $news->getDatetime1('d-m-Y'); ?>
+              <p>
+              <?php echo $news->getText1(); ?>
+              </p>
+            </li>
+          <?php } ?>
+          </ul>
+        </div>
+      <?php } ?>
+    </div>
+  </div>
+</body>
+</html>

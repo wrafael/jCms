@@ -1,0 +1,260 @@
+/** algemene regels **/
+.hidden {
+	display: none;
+}
+
+ul.errors {
+	color:red;
+}
+p{
+  padding: 10px 0 10px 0;
+}
+a{
+ color:black;
+ text-decoration:underline;
+}
+a:hover{
+ color:#E87B10;
+}
+
+/** layout **/
+* {
+	margin:0;
+	padding:0;
+    font-family: Tahoma;
+    font-size: 13px;
+}
+#nav{
+	height:38px;
+	width:100%;
+	margin:0;
+	padding:0;
+	background: url(/img/backend/shared/repeat.jpg) repeat-x;
+	position: fixed;
+}
+#nav ul{
+  list-style:none;
+}
+#nav ul li{
+  display:block;
+  float:left;
+  margin-left:10px;
+}
+#nav ul li a{
+	background: url(/img/backend/shared/tree_border.jpg);
+	background-position: right;
+	background-repeat: repeat-y;
+    color: #FFFFFF;
+    display: block;
+    float: left;
+    height: 37px;
+    line-height: 35px;
+    padding: 0 20px;
+	text-decoration: none;
+}
+#nav ul li a:hover{
+  color:#FFB350;
+}
+
+#aside{
+    height: 100%;
+    overflow: auto;
+    position: fixed;
+	width:300px;
+	margin-bottom:40px;
+	border-right-width:1px;
+	border-right-style:groove;
+}
+#section{
+	border-right-width:1px;
+	border-right-style:groove;
+    height: 100%;
+    overflow: auto;
+    width: 800px;
+	position:absolute;
+	left:300px;
+}
+#sectionHolder{
+	padding:30px;
+	margin-top:38px;
+	overflow:hidden;
+}
+
+/** object type keuze **/
+div#objecttype_choice_holder a{
+  color: black;
+  text-decoration: underline;
+}
+div#objecttype_choice_holder a:hover{
+  color: #E87B10;
+	text-decoration: underline;
+}
+#addcontent_objecttype_choice_holder, #objecttype_choice_holder{
+	width:800px;
+}
+body.iframe div.addcontent_objecttype_choice, #section div.objecttype_choice{
+	displey: block;
+	width: 180px;
+	height: 180px;
+	cursor: pointer;
+	border-width: 1px;
+	border-color: #E87B10;
+	border-style: solid;
+	padding: 10px;
+	margin: 10px;
+	float: left;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+}
+body.iframe div.addcontent_objecttype_choice p, #section div.objecttype_choice p{
+	padding: 5px 0 5px 0;
+}
+body.iframe div.addcontent_objecttype_choice:hover, #section div.objecttype_choice:hover {
+	border-width: 2px;
+	padding: 9px;
+}
+
+/** datatable **/
+table.dataTable{
+
+}
+table.datatable tr{
+	cursor:pointer;
+}
+table.datatable tr:hover td{
+	font-style:italic;
+}
+
+/** roles screen **/
+table#used_fields, table#usable_fields{
+	width: 750px;
+	margin:10px;
+	text-align: center;
+	border-width: 2px;
+	border-color: #E87B10;
+	border-style: solid;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	background-color: white;
+}
+table#used_fields td, table#usable_fields td{
+	width:150px;
+	border-width: 1px;
+	border-color: #E87B10;
+	border-style: solid;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	background-color: white;
+}
+table#used_fields td input, table#usable_fields td input{
+ border:0;
+}
+/** formulieren **/
+table tbody th{
+ vertical-align: top;
+}
+body.iframe{
+	padding:20px;
+}
+#content_iframe{
+margin-top:60px;
+border:0;
+}
+
+div.ui-tooltip p{
+	margin:10px;
+}
+
+div.filler-50{
+	height:50px;
+}
+div.filler-horizontal-300{
+	width: 300px;
+	float: left;
+	 height: 100%;
+
+}
+div.vertical-div-wrapper{
+	float: left;
+}
+p#page_description{
+  font-style: italic;
+  font-size: 12px;
+  color:grey;
+}
+button.confirm_box{
+  float:left;
+}
+div.jcms_treeitem:hover{
+}
+div.jcms_treeitem{
+  width: 200px;
+  height:20px;
+  overflow:hidden;
+  display:block;
+}
+div.jcms_treeitem span{
+padding:0 0 8px 10px;
+}
+li.jqtree-folder > div > span{
+  font-weight: bold;
+}
+textarea{
+  height:200px;
+}
+
+/** TABLE **/
+table.minimal, table.minimal td, table.minimal th{
+	border:none;
+	border-collapse:collapse;
+	margin:0;
+	padding:0;
+}
+table.minimal{
+	border:none;
+}
+table.minimal td, table.minimal th{
+	padding:.2em .5em;
+	vertical-align:top;
+	font-weight:normal;
+}
+table.minimal thead th{
+	font-weight:bold;
+	font-size:90%;
+	vertical-align:bottom;
+	border-bottom:1px solid #000;
+	margin-bottom:5px;
+}
+table.minimal tbody th, table.minimal td{
+	border-right:1px solid #000;
+}
+
+table.minimal tbody td, table.minimal tbody th{
+	padding:7px 10px;
+}
+table.minimal tbody th{
+	border-left:1px solid #000;
+}
+table.minimal tfoot td, table.minimal tfoot th{
+	margin-top:5px;
+	border:none;
+	border-top:1px solid #000;
+}
+table.minimal caption{
+	text-align:left;
+	font-size:120%;
+	font-weight:bold;
+	margin:5px;
+}
+table.minimal a:link{
+	color:#363;
+}
+table.minimal a:visited{
+	color:#696;
+}
+table.minimal a:hover{
+	text-decoration:none;
+}
+table.minimal a:active{
+	color:#000;
+}

@@ -1,0 +1,31 @@
+<p><a href="/backend/index/useredit"><?php t('ADD_NEW_USER_LINK'); ?></a><p>
+<table class="display datatable" id="usertable">
+	<thead>
+		<tr>
+			<th><?php t('TABLE_HEADER_USER'); ?></th>
+			<th><?php t('TABLE_HEADER_EMAIL'); ?></th>
+			<th><?php t('TABLE_HEADER_ROLES'); ?></th>
+
+		</tr>
+	</thead>
+	<tbody>
+	<?php foreach($this->users as $user){?>
+		<tr class="gradeA" id="user_<?php echo $user->getId(); ?>">
+			<td><?php echo $user->getUsername(); ?></td>
+			<td><?php echo $user->getEmail(); ?></td>
+			<td>
+			<?php
+  $roles = $user->getRoles ();
+  $rolesStr = '';
+  foreach ( $roles as $role ) {
+    $rolesStr .= $role->getName () . ', ';
+  }
+  echo str_replace ( array (
+      ', x',
+      'x'
+  ), '', $rolesStr . 'x' );
+  ?></td>
+		</tr>
+	<?php } ?>
+	</tbody>
+</table>

@@ -1,0 +1,15 @@
+<p><a href="/backend/index/roleedit"><?php t('ADD_NEW_ROLE_LINK'); ?></a></p>
+<table class="display datatable" id="roletable">
+	<thead>
+		<tr>
+			<th><?php t('TABLE_HEADER_ROLE'); ?></th>
+		</tr>
+	</thead>
+	<tbody>
+	<?php foreach($this->roles as $role){?>
+		<tr class="gradeA" id="role_<?php echo $role->getId(); ?>">
+			<td><?php echo $role->getName(); ?></td>
+		</tr>
+	<?php } ?>
+	</tbody>
+</table>
