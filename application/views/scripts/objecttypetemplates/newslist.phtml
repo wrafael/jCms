@@ -1,0 +1,11 @@
+<h1>
+<?php echo $this->object->getTitle(); ?>
+</h1>
+<p>
+<?php echo $this->object->getContent(); ?>
+<ul id="list">
+<?php foreach($this->children as $child){ ?>
+  <li><a href="<?php echo $child->getUrl(); ?>" title="<?php echo $child->getTitle(); ?>"><?php echo $child->getTitle(); ?></a> <span><?php echo $child->getDatetime1('d-m-Y'); if($child->getDatetime2()) echo ' tot '.$child->getDatetime2('d-m-Y'); ?></span></li>
+<?php } ?>
+</ul>
+</p>

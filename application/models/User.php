@@ -226,19 +226,19 @@ EOT;
 	}
 
 	public function sendActivationMail(){
-	  $txt = Default_Model_Content::getInstanceByCode('ACCOUNT_ACTIVATED_MAIL_TXT');
+	  $txt = Default_Model_Content::getInstanceByCode('ACCOUNT_ACTIVATED_EMAIL_TXT');
 	  if($txt){
 	    $mail = new Zend_Mail();
 	    $mail->setBodyText($txt->getContent());
 	    $adminEmail = Zend_Registry::getInstance()->settings['site']['adminemail'];
 	    $mail->setFrom($adminEmail, Zend_Registry::getInstance()->settings['site']['title']);
 	    $mail->addTo($this->getEmail(), 'Admin '.Zend_Registry::getInstance()->settings['site']['title']);
-	    $subject = Default_Model_Content::getInstanceByCode('ACCOUNT_ACTIVATED_MAIL_SUBJECT');
+	    $subject = Default_Model_Content::getInstanceByCode('ACCOUNT_ACTIVATED_EMAIL_SUBJECT');
 	    if($subject){
 	      $mail->setSubject($subject->getContent());
 	    }else{
 	      $mail = new Zend_Mail();
-	      $mail->setBodyText('Just send a activation inform email to user '.$this->getId().' but i could not find the iten ACCOUNT_ACTIVATED_MAIL_SUBJECT .');
+	      $mail->setBodyText('Just send a activation inform email to user '.$this->getId().' but i could not find the item ACCOUNT_ACTIVATED_MAIL_SUBJECT .');
 	      $adminEmail = Zend_Registry::getInstance()->settings['site']['sysadminemail'];
 	      $mail->setFrom($adminEmail, Zend_Registry::getInstance()->settings['site']['title']);
 	      $mail->addTo($adminEmail, 'Admin '.Zend_Registry::getInstance()->settings['site']['title']);

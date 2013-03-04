@@ -128,6 +128,10 @@ class Default_Model_Objecttype {
     foreach(FieldDefenitions::$fields as $field=>$type){
       if(array_key_exists($field, $fieldsArray)){
         $fieldsUsed[$field] = $fieldObjectsArray[$field];
+//         echo '<pre>';
+//         var_dump($fieldsUsed[$field]);
+//         echo '</pre>';
+//         die;
       }else{
         $fieldsUsable[$field] = $type;
       }

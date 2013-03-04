@@ -59,7 +59,7 @@ class Tree
 
 		// get all the content the user has rights for
 		if($user->hasRole('God')){
-			$sql = 'SELECT '.$addToQuery.' content.active, content.id, content.parent, content.folder as folder, content.objecttype_id, content.code, content.title, content.sort from content where content.active = 1 order by content.sort';
+			$sql = 'SELECT '.$addToQuery.' content.active, content.id, content.url, content.parent, content.folder as folder, content.objecttype_id, content.code, content.title, content.sort from content where content.active = 1 order by content.sort';
 		}else{
 			$sql = <<<EOT
 			SELECT {$addToQuery} content.active, content.url, content.content, content.id, content.parent, content.folder as folder, content.objecttype_id, content.code, content.title, content.sort FROM user

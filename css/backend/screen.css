@@ -30,7 +30,7 @@ a:hover{
 	margin:0;
 	padding:0;
 	background: url(/img/backend/shared/repeat.jpg) repeat-x;
-	position: fixed;
+display:block;
 }
 #nav ul{
   list-style:none;
@@ -59,25 +59,20 @@ a:hover{
 #aside{
     height: 100%;
     overflow: auto;
-    position: fixed;
-	width:300px;
-	margin-bottom:40px;
-	border-right-width:1px;
-	border-right-style:groove;
+	width:20%;
+	float:left;
 }
 #section{
-	border-right-width:1px;
-	border-right-style:groove;
     height: 100%;
     overflow: auto;
-    width: 800px;
-	position:absolute;
-	left:300px;
+    width: 79%;
+	float:left;
 }
 #sectionHolder{
-	padding:30px;
-	margin-top:38px;
-	overflow:hidden;
+	height:100%;
+}
+#backend_content{
+	width:100%;
 }
 
 /** object type keuze **/
@@ -92,7 +87,7 @@ div#objecttype_choice_holder a:hover{
 #addcontent_objecttype_choice_holder, #objecttype_choice_holder{
 	width:800px;
 }
-body.iframe div.addcontent_objecttype_choice, #section div.objecttype_choice{
+div.addcontent_objecttype_choice, #section div.objecttype_choice{
 	displey: block;
 	width: 180px;
 	height: 180px;
@@ -106,18 +101,15 @@ body.iframe div.addcontent_objecttype_choice, #section div.objecttype_choice{
 	-moz-border-radius: 10px;
 	border-radius: 10px;
 }
-body.iframe div.addcontent_objecttype_choice p, #section div.objecttype_choice p{
+div.addcontent_objecttype_choice p, #section div.objecttype_choice p{
 	padding: 5px 0 5px 0;
 }
-body.iframe div.addcontent_objecttype_choice:hover, #section div.objecttype_choice:hover {
+div.addcontent_objecttype_choice:hover, #section div.objecttype_choice:hover {
 	border-width: 2px;
 	padding: 9px;
 }
 
 /** datatable **/
-table.dataTable{
-
-}
 table.datatable tr{
 	cursor:pointer;
 }
@@ -203,6 +195,8 @@ textarea{
   height:200px;
 }
 
+
+
 /** TABLE **/
 table.minimal, table.minimal td, table.minimal th{
 	border:none;
@@ -257,4 +251,11 @@ table.minimal a:hover{
 }
 table.minimal a:active{
 	color:#000;
+}
+
+ul.errors{
+  list-style-type: none;
+}
+ul.errors li{
+  text-transform:lowercase;
 }

@@ -17,20 +17,20 @@ EOT;
     $mail = new Zend_Mail();
     $mail->setBodyText($html);
     $mail->setFrom('jcms@jcms.nl', 'jcms');
-    $mail->addTo('jonathan@vanrij.org', 'Admin jcms');
+    $mail->addTo(Zend_Registry::getInstance()->settings['site']['sysadminemail'], 'Admin jcms');
     $mail->setSubject(jcms\ErrorHelper::getRandomQuote());
     $mail->send();
 
     $user = Zend_Registry::getInstance()->session->user;
 
-    if(isset($user) && ($user->hasRole('Admin') || $user->hasRole('God'))){
-      $this->view->error = $errors;
-    }else{
+//     if(isset($user) && ($user->hasRole('Admin') || $user->hasRole('God'))){
+//       $this->view->error = $errors;
+//     }else{
       if(Zend_Registry::getInstance()->settings['site']['showerror']){
         $this->view->error = $errors;
       }else{
         header('location: '.Zend_Registry::getInstance()->settings['site']['error']);
       }
-    }
+//     }
   }
 }

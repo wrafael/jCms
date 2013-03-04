@@ -387,17 +387,20 @@ class Default_Model_Content extends Zend_Acl implements Zend_Acl_Resource_Interf
     try{
       $content = $query->getSingleResult();
     }catch(Exception $e){
-      return null;
+      header('HTTP/1.1 404 Not Found');
+      return false;
     }
 
     if($ignoreACL) return $content;
 
     $content->setACL();
 
-    if(!$content->isAllowedByUser()){
-      return null;
+    if($content->isAllowedByUser()){
+      return $content;
+    }else{
+      header('HTTP/1.1 403 Forbidden');
+      return false;
     }
-    return $content;
   }
 
   /**

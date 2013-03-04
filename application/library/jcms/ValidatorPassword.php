@@ -25,14 +25,19 @@ class ValidatorPassword extends \Zend_Validate_Abstract
 
 	public function isValid($value)
 	{
-	  // TODO er moet wel uberhoubt 1 wachtwoord aanwezig zijn!
-
-
 		$request = \Zend_Controller_Front::getInstance()->getRequest();
 
-		if(trim($request->getParam ($this->first, 'foo')) == trim($request->getParam ($this->second, 'bar'))){
+		$pw1 = trim($request->getParam ($this->first, 'foo'));
+		$pw2 = trim($request->getParam ($this->second, 'foo'));
+		
+		if($pw1 == '' && $pw2 == ''){
 			return true;
 		}
+		
+		if($pw1 == $pw2){
+			return true;
+		}
+
 		$this->_error(self::CHECK_TYPO);
 		return false;
 	}

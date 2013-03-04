@@ -29,7 +29,7 @@ class ModelHelper
     $query->setParameter(1,$id);
     try{
       $object = $query->getSingleResult();
-
+      
       // if object is of content, let's check the rights
       if($object instanceof \Default_Model_Content){
         $object->setACL();
@@ -37,10 +37,15 @@ class ModelHelper
         if($object->isAllowedByUser()){
           return $object;
         }else{
+          header('HTTP/1.1 403 Forbidden');
           return false;
         }
+      }else if(!$object){
+      	header('HTTP/1.1 404 Not Found');
+        return false;
+      }else{
+      	return $object;
       }
-      return $object;
     }catch (\Doctrine\ORM\NoResultException $e){
       return false;
     }catch (\Exception $e){

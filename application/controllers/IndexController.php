@@ -18,7 +18,7 @@ class IndexController extends Zend_Controller_Action {
 
     jcms\Frontend::initFrontend($this);
     jcms\Frontend::setViewScriptForContent($this->_helper,$this->getRequest());
-    $this->view->object = jcms\Frontend::putMenuInLayout($this->getRequest()->getParam('id'));
+    jcms\Frontend::putMenuInLayout();
 
     $newsHolder = Default_Model_Content::getInstanceByCode('NEWS', true);
     if($newsHolder){
@@ -28,12 +28,13 @@ class IndexController extends Zend_Controller_Action {
   }
 
   public function indexAction() {
-
+  	$this->view->object = jcms\Frontend::getCurrentObject();
   }
 
   // if there is no action for the gives contenttype, call the index
   public function __call($functionname, $params) {
-    jcms\Frontend::triggerControllerFunction($this,Default_Model_Content::getInstanceByPk($this->getRequest()->getParam('id')));
+	$this->view->object = jcms\Frontend::getCurrentObject();
+	jcms\Frontend::triggerControllerFunction($this,jcms\Frontend::getCurrentObject());
   }
 
   // this objecttype references to an other url
@@ -49,15 +50,14 @@ class IndexController extends Zend_Controller_Action {
     }
   }
 
-  // this objecttype references to an other url
-  public function listAction() {
+  public function newslistAction() {
     \Zend_Layout::getMvcInstance()->assign('showsubmenu',false);
 
-    $object = Default_Model_Content::getInstanceByPk($this->getRequest()->getParam('id'));
+    $object = jcms\Frontend::getCurrentObject();
     $checkedChildren = array();
 
     $query = Zend_Registry::getInstance()->entitymanager->createQuery('select c from Default_Model_Content c WHERE c.parent = ?1 and c.datetime1<CURRENT_TIMESTAMP() AND (c.datetime2>CURRENT_TIMESTAMP() OR c.datetime2 is null) order by c.datetime1 asc')->setMaxResults(10);
-    $query->setParameter(1,$object->getId());
+    $query->setParameter(1, $object->getId());
     $children = $query->getResult();
 
     foreach($children as $child){
@@ -71,6 +71,7 @@ class IndexController extends Zend_Controller_Action {
     }
 
     $this->view->children = $checkedChildren;
+    $this->view->object = $object;
   }
 
   public function agendaAction(){

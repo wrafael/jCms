@@ -107,7 +107,8 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         '/account/logout',
         '/account/register',
         '/account/success',
-        '/account/index'
+        '/account/index',
+        '/account/registerteacher',
     );
 
     if((bool)! strstr($_SERVER["REQUEST_URI"],'/file') && (bool)! strstr($_SERVER["REQUEST_URI"],'/backend') && ! in_array($_SERVER["REQUEST_URI"],$defaultUrls)){

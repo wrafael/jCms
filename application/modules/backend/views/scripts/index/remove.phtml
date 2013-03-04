@@ -1,0 +1,12 @@
+<p>
+<?php
+if($this->removed){
+  echo $this->title.' '; t('REMOVED_OBJECT_SUCCESSFULLY'); 
+}
+?>
+<?php
+if(!$this->removed){
+ t('REMOVED_OBJECT_NOT_SUCCESSFULLY');
+}
+?>
+</p>

@@ -7,7 +7,7 @@ if($this->object){
     $info = json_decode($photo->getString1());
     $url = "/file/index/id/{$photo->getId()}/field/string1";
     $urlDownload = "/file/download/id/{$photo->getId()}/field/string1";
-    echo "<a class=\"slideshow image_link\" href=\"{$url}/height/500/width/700/crop/0\" rel=\"{$urlDownload}\" title=\"{$photo->getTitle()}\"><img src=\"{$url}/height/150/width/150/crop/1\" alt=\"{$photo->getTitle()}\" /></a>";
+    echo "<a class=\"slideshow image_link\" href=\"{$url}\" rel=\"{$urlDownload}\" title=\"{$photo->getTitle()}\"><img src=\"{$url}/height/150/width/150/crop/1\" alt=\"{$photo->getTitle()}\" /></a>";
   }
 
 }

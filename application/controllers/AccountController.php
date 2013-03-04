@@ -30,56 +30,104 @@ class AccountController extends Zend_Controller_Action {
     $this->_helper->viewRenderer('account/account',null,true);
   }
 
+  public function registerteacherAction(){
+  	$form = jcms\FormsHelper::getRegisterForm('/account/registerteacher', true);
+  	
+  	if($this->_request->isPost() && $form->isValid($_POST)){
+  	
+  		// set fields
+  	
+  		$email = $this->getRequest()->getParam('email', null);
+  		$username = $this->getRequest()->getParam('username', null);
+  		$password = $this->getRequest()->getParam('password', null);
+  	
+  		$user = new Default_Model_User();
+  		$user->setActive(0);
+  		$user->setEmail($email);
+  		$user->setNote('Registratie van een docent.');
+  		$user->setPassword($password, true);
+  		$user->setUsername($username);
+
+  		$user->save();
+  	
+  		// send the admin a mail
+  		$admin = Default_Model_User::getInstanceByPk(2);
+  		$key = $admin->getNewSsokey();
+  	
+  		$url = $_SERVER['HTTP_HOST'].'/backend/index/sso/ssokey/'.$key.'/uid/'.$admin->getId().'/url/'.str_replace('%2F', '_', urlencode('/backend/index/useredit/id/'.$user->getId()));
+  	
+  		$html = str_replace('%url%',$url,Default_Model_Content::getInstanceByCode('USER_REG_MAIL_TEMPLATE', true)->getContent());
+  	
+  		$mail = new Zend_Mail();
+  		$mail->setBodyText($html);
+  		$mail->setFrom('info@jcms.nl', 'jcms');
+  	
+  		$mail->addTo(Zend_Registry::getInstance()->settings['site']['sysadminemail'], 'Admin '.Zend_Registry::getInstance()->settings['site']['title']);
+  		$mail->setSubject(trim(Default_Model_Content::getInstanceByCode('USER_REG_MAIL_TITLE', true)->getContent()));
+  		$mail->send();
+  	
+  		$this->_helper->redirector('success');
+  	
+  	}
+  	
+  	$query = Zend_Registry::getInstance()->entitymanager->createQuery('select c from Default_Model_Content c WHERE c.code = ?1');
+  	$query->setParameter(1,'REGISTERTEACHER_TEXT');
+
+  	$content = $query->getSingleResult();
+  	
+  	if($content) $this->view->registerText = $content->getContent();
+  	$this->view->registerForm = $form;
+  }
+  
   public function registerAction() {
-    $form = jcms\FormsHelper::getRegisterForm('/account/register');
+  	$form = jcms\FormsHelper::getRegisterForm('/account/register', false);
+  	
+  	if($this->_request->isPost() && $form->isValid($_POST)){
+  	
+  		// set fields
+  	
+  		$email = $this->getRequest()->getParam('email', null);
+  		$username = $this->getRequest()->getParam('username', null);
+  		$password = $this->getRequest()->getParam('password', null);
+  		$note = $this->getRequest()->getParam('note', null);
+  	
+  		$user = new Default_Model_User();
+  		$user->setActive(0);
+  		$user->setEmail($email);
+  		$user->setNote($note);
+  		$user->setPassword($password, true);
+  		$user->setUsername($username);
+  	
+  	
+  		$user->save();
+  	
+  		// send the admin a mail
+  		$admin = Default_Model_User::getInstanceByPk(2);
+  		$key = $admin->getNewSsokey();
+  	
+  		$url = $_SERVER['HTTP_HOST'].'/backend/index/sso/ssokey/'.$key.'/uid/'.$admin->getId().'/url/'.str_replace('%2F', '_', urlencode('/backend/index/useredit/id/'.$user->getId()));
+  	
+  		$html = str_replace('%url%',$url,Default_Model_Content::getInstanceByCode('USER_REG_MAIL_TEMPLATE', true)->getContent());
+  	
+  		$mail = new Zend_Mail();
+  		$mail->setBodyText($html);
+  		$mail->setFrom('info@jcms.nl', 'jcms');
+  	
+  		$mail->addTo(Zend_Registry::getInstance()->settings['site']['sysadminemail'], 'Admin '.Zend_Registry::getInstance()->settings['site']['title']);
+  		$mail->setSubject(trim(Default_Model_Content::getInstanceByCode('USER_REG_MAIL_TITLE', true)->getContent()));
+  		$mail->send();
+  	
+  		$this->_helper->redirector('success');
+  	
+  	}
+  	
+  	$query = Zend_Registry::getInstance()->entitymanager->createQuery('select c from Default_Model_Content c WHERE c.code = ?1');
+  	$query->setParameter(1,'REGISTER_TEXT');
 
-    if($this->_request->isPost() && $form->isValid($_POST)){
-
-      // set fields
-
-      $email = $this->getRequest()->getParam('email', null);
-      $username = $this->getRequest()->getParam('username', null);
-      $password = $this->getRequest()->getParam('password', null);
-      $note = $this->getRequest()->getParam('note', null);
-
-      $user = new Default_Model_User();
-      $user->setActive(0);
-      $user->setEmail($email);
-      $user->setNote($note);
-      $user->setPassword($password, true);
-      $user->setUsername($username);
-
-
-      $user->save();
-
-      // send the admin a mail
-      $admin = Default_Model_User::getInstanceByPk(2);
-      $key = $admin->getNewSsokey();
-
-      $url = $_SERVER['HTTP_HOST'].'/backend/index/sso/ssokey/'.$key.'/uid/'.$admin->getId().'/url/'.str_replace('%2F', '_', urlencode('/backend/index/useredit/id/'.$user->getId()));
-
-      $html = str_replace('%url%',$url,Default_Model_Content::getInstanceByCode('USER_REG_MAIL_TEMPLATE', true)->getContent());
-
-      $mail = new Zend_Mail();
-      $mail->setBodyText($html);
-      $mail->setFrom('info@jcms.nl', 'jcms');
-
-      $adminEmail = Zend_Registry::getInstance()->settings['site']['sysadminemail'];
-
-      $mail->addTo(Zend_Registry::getInstance()->settings['site']['sysadminemail'], 'Admin '.Zend_Registry::getInstance()->settings['site']['title']);
-      $mail->setSubject(trim(Default_Model_Content::getInstanceByCode('USER_REG_MAIL_TITLE', true)->getContent()));
-      $mail->send();
-
-      $this->_helper->redirector('success');
-
-    }
-
-    $query = Zend_Registry::getInstance()->entitymanager->createQuery('select c from Default_Model_Content c WHERE c.code = ?1');
-    $query->setParameter(1,'REGISTER_TEXT');
-    $content = $query->getSingleResult();
-
-    if($content) $this->view->registerText = $content->getContent();
-    $this->view->registerForm = $form;
+  	$content = $query->getSingleResult();
+  	
+  	if($content) $this->view->registerText = $content->getContent();
+  	$this->view->registerForm = $form;
   }
 
   public function successAction() {
@@ -111,7 +159,12 @@ class AccountController extends Zend_Controller_Action {
         $values = $form->getValues();
         $result = \Zend_Auth::getInstance()->authenticate(new jcms\Auth($values['username'],$values['password']));
         if($result->getCode()){
-          $this->_helper->redirector('index');
+          $landing = Default_Model_Content::getInstanceByCode(Zend_Registry::getInstance()->settings['jcms']['logon_landing']);
+          if($landing){
+          	header('Location: '.$landing->getUrl());
+          }else{
+          	$this->_helper->redirector('index');
+          }
         }
       }
     }

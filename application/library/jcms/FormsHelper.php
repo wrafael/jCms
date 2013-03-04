@@ -203,7 +203,7 @@ class FormsHelper extends FieldDefenitions {
   public static function getObjecttypeSelectorForm($parent) {
 
     $form = new \Zend_Form();
-    $form->setAction('/backend/iframe/contentedit')->setMethod('post');
+    $form->setAction('/backend/index/contentedit')->setMethod('post');
     $form->setAttrib('id','content');
     $form->setAttrib('class','hidden');
 
@@ -270,9 +270,15 @@ class FormsHelper extends FieldDefenitions {
    * @param String $mode
    */
   public static function getContentForm(\Default_Model_Content $content, $mode = 'add', $action = '#') {
-
     $form = new \Zend_Form();
 
+    $submit = new \Zend_Form_Element_Submit('submit');
+    $submit->setLabel(tr('SAVE'));
+    $submit->setName('save_content');
+    $submit->setDecorators(self::$formDecoratorButton);
+    
+    $elements[] = $submit;
+    
     $objecttype = $content->getObjecttype();
 
     $elements = array();
@@ -306,7 +312,8 @@ class FormsHelper extends FieldDefenitions {
       $getFormGetter = $objecttypefield->getFormGetterString();
       switch ($mode) {
         case 'edit' :
-          $elements[] = parent::$getFormGetter($metadata,$mode,$content->$getContentGetter(), $content);
+
+          $elements[] = parent::$getFormGetter($metadata, $mode, $content->$getContentGetter(), $content);
 //           if('getFormFile' == $getFormGetter || 'getFormImage' == $getFormGetter){
 //             $form->setAttrib('enctype', 'multipart/form-data');
 //           }
@@ -331,12 +338,14 @@ class FormsHelper extends FieldDefenitions {
     $form->setAction($action)->setMethod('post');
     $form->setAttrib('id','content_form');
 
+    $form->setAction(\Zend_Registry::getInstance()->request->getRequestUri());
+    
     $form->addDecorators(self::$formDecoratorForm);
 
     foreach($elements as $element){
       $form->addElement($element);
     }
-
+    
     return $form;
   }
 
@@ -523,7 +532,7 @@ class FormsHelper extends FieldDefenitions {
    *
    * @return \Zend_Form
    */
-  public static function getRegisterForm($action) {
+  public static function getRegisterForm($action, $skipReason = false) {
     $form = new \Zend_Form();
     $form->setAction($action)->setMethod('post');
     $form->setAttrib('id','user');
@@ -564,11 +573,11 @@ class FormsHelper extends FieldDefenitions {
     $email->setDecorators(self::$formDecoratorText);
     $form->addElement($email);
 
-    $note = new \Zend_Form_Element_Textarea('note');
-    $note->setRequired(true);
-    $note->setLabel(tr('ACCOUNT_REASON'));
-    $note->setDecorators(self::$formDecoratorText);
-    $form->addElement($note);
+    if(!$skipReason) $note = new \Zend_Form_Element_Textarea('note');
+    if(!$skipReason) $note->setRequired(true);
+    if(!$skipReason) $note->setLabel(tr('ACCOUNT_REASON'));
+    if(!$skipReason) $note->setDecorators(self::$formDecoratorText);
+    if(!$skipReason) $form->addElement($note);
 
     $submit = new \Zend_Form_Element_Submit('submit');
     $submit->setLabel(tr('SAVE'));
@@ -646,6 +655,10 @@ class FormsHelper extends FieldDefenitions {
     $email->setLabel(tr('EMAIL'));
     if($user)
       $email->setValue($user->getEmail());
+    if($user)
+    	$email->addValidator(new ValidatorUnique(new \Default_Model_User(),'email',$user->getId()));
+    if(! $user)
+    	$email->addValidator(new ValidatorUnique(new \Default_Model_User(),'email'));
     $email->addValidator(new \Zend_Validate_EmailAddress());
     $email->setDecorators(self::$formDecoratorText);
     $form->addElement($email);

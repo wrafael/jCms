@@ -1,0 +1,55 @@
+<?php
+
+if($this->success == 1){
+  jcms\Translator::t('ITEM_SAVED');
+  ?>
+<script>
+    updateTreeNewContent(
+    	    '<?php echo $this->parent; ?>', 
+    	    '<?php echo $this->mode; ?>', 
+    	    '<?php echo $this->content->getSort(); ?>', 
+    	    '<?php echo $this->currentObjectType->getIcon() ?>', 
+    	    '<?php echo $this->content->getTitle(); ?>', 
+    	    '<?php echo $this->content->getId(); ?>', 
+    	    '<?php echo $this->content->getPermissionsString(); ?>');
+  </script>
+<?php
+}
+
+if(isset($this->currentObjectType)){
+
+  switch($this->mode){
+    case 'edit':
+        ?><p id="page_description"><?php jcms\Translator::t('EDIT_ITEM_OF_TYPE'); echo $this->currentObjectType->getName(); ?></p><?php
+      break;
+    case 'add':
+        ?><p id="page_description"><?php jcms\Translator::t('NEW_ITEM_OF_TYPE'); echo $this->currentObjectType->getName(); ?></p><?php
+      break;
+  }
+}
+
+echo $this->form;
+
+if($this->mode == 'add'){
+  ?>
+<div id="addcontent_objecttype_choice_holder">
+<?php
+if($this->objecttypes){
+  foreach($this->objecttypes as $objecttype){
+    ?>
+      <div class="addcontent_objecttype_choice" id="objecttype_<?php echo $objecttype->getId(); ?>">
+		<img class="icon"
+			src="/img/backend/icons/<?php echo $objecttype->getIcon(); ?>"
+			alt="<?php echo $objecttype->getName(); ?>" />
+
+		<?php echo $objecttype->getName(); ?>
+		<p>
+		<?php echo $objecttype->getDescription(); ?>
+		</p>
+	</div>
+<?php
+  }
+  }
+  ?>
+</div>
+<?php } ?>
