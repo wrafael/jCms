@@ -14,6 +14,9 @@ use Doctrine\DBAL\Types\BooleanType;
 
 class FileController extends Zend_Controller_Action {
 
+  /**
+   * initiates the controller
+   */
   public function init() {
     Zend_Auth::getInstance()->setStorage(new Zend_Auth_Storage_Session(jcms\Auth::SESSION_FRONTEND_USER));
     jcms\Frontend::initFrontend($this);
@@ -23,6 +26,9 @@ class FileController extends Zend_Controller_Action {
     $object = Default_Model_Content::getInstanceByPk($this->getRequest()->getParam('id'));
   }
 
+  /**
+   * Default controller to handle a file
+   */
   public function indexAction(){
     jcms\Files::serveFile(
       $this->getRequest()->getParam('id',null),
@@ -34,6 +40,9 @@ class FileController extends Zend_Controller_Action {
     );
   }
 
+  /**
+   * Default controller to handle a file download
+   */
   public function downloadAction(){
     jcms\Files::serveFile(
     $this->getRequest()->getParam('id',null),

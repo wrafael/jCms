@@ -1,4 +1,7 @@
 <?php
+/**
+ * This class has a decorator the for image form fields
+ */
 namespace jcms;
 
 class ImageDecorator extends \Zend_Form_Decorator_Abstract implements \Zend_Form_Decorator_Marker_File_Interface {

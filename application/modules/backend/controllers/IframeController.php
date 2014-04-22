@@ -2,6 +2,11 @@
 
 class Backend_IframeController extends Zend_Controller_Action {
 
+  /**
+   * initiates the controller
+   * 
+   * Set's up averything you need to handle a iframe call in the backend
+   */
   public function init() {
     Zend_Auth::getInstance()->setStorage(new Zend_Auth_Storage_Session(jcms\Auth::SESSION_BACKEND_USER));
 
@@ -25,6 +30,9 @@ class Backend_IframeController extends Zend_Controller_Action {
     $this->user = $userSession->object;
   }
 
+  /*
+   * Edit a content page iframe action
+   */
   public function contenteditAction() {
 
     $info = array();
@@ -132,10 +140,6 @@ class Backend_IframeController extends Zend_Controller_Action {
           }
 
           try{
-
-//             if($info['mode'] == 'add'){
-//               $info['savesuccessmessage'] = jcms\Translator::tr('FILES_PREVIEW_ONLY_WHEN_REOPEND');
-//             }
 
             if(is_null($content->getSort()))
               $content->setSortValue(false);

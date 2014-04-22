@@ -1,4 +1,7 @@
 <?php
+/**
+ * Custom validator for unique values based on the Zend validator
+ */
 namespace jcms;
 
 class ValidatorUnique extends \Zend_Validate_Abstract {

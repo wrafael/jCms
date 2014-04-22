@@ -1,4 +1,7 @@
 <?php
+/**
+ * This is the form helper of jCms. It generates a lot of form objects. These can be used to render forms in templates.
+ */
 namespace jcms;
 
 /**
@@ -235,32 +238,6 @@ class FormsHelper extends FieldDefenitions {
 
     return $form;
   }
-
-  /**
-   * Gives a form to upload multiple files
-   *
-   * @param Integer $parent
-   */
-//   public static function getMultipleFileUploadForm($action) {
-
-//     $form = new \Zend_Form();
-//     $form->setAction($action)->setMethod('post');
-
-//     $files = new \Zend_Form_Element_File('images', array('label' => 'Images:', 'multiple' => 'multiple'));
-//     $files->setIsArray(true);
-
-//     $form->addElement($files);
-
-//     $submit = new \Zend_Form_Element_Submit('submit');
-//     $submit->setLabel(tr('SAVE'));
-//     $submit->setDecorators(self::$formDecoratorButton);
-
-//     $form->addElement($submit);
-
-//     $form->addDecorators(self::$formDecoratorForm);
-
-//     return $form;
-//   }
 
   /**
    * Generates a form to handle a Content object

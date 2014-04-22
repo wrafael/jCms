@@ -1,8 +1,19 @@
 <?php
+/**
+ * This class does a lot of file handling, rendering and serving functionalities for jCms.
+ */
 namespace jcms;
 
 class Files {
 
+  /**
+   * Saves a file that needs to be saves from a content page field
+   * 
+   * @param \Default_Model_Objecttypefield $field
+   * @param \Zend_Form $form
+   * @param \Default_Model_Content $content
+   * @throws \Exception
+   */
   public static function saveContentFile(\Default_Model_Objecttypefield $field, \Zend_Form $form, \Default_Model_Content $content) {
     $content->setSort(time());
     $content->save();
@@ -188,6 +199,17 @@ class Files {
     // }
   }
 
+  /**
+   * Resizes an image
+   * 
+   * @param string $src
+   * @param string $dst
+   * @param number $width
+   * @param number $height
+   * @param string $type
+   * @param string $crop
+   * @return boolean
+   */
   public static function resizeImage($src, $dst, $width, $height, $type, $crop = 0) {
     $type = strtolower($type);
 
@@ -355,6 +377,12 @@ class Files {
     }
   }
 
+  /**
+   * Get's you the mimetype of a given file extention
+   * 
+   * @param string $file
+   * @return string
+   */
   public static function getMimeType($file) {
 
     $file = strtolower($file);

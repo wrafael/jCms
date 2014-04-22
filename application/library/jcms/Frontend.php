@@ -1,4 +1,7 @@
 <?php
+/**
+ * This class has functions to get the frontend up and running with jCms
+ */
 namespace jcms;
 
 class Frontend {

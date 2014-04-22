@@ -27,17 +27,25 @@ class IndexController extends Zend_Controller_Action {
     }
   }
 
+  /*
+   * Default action of the index controller.
+   * Get's the currently used object and pushes it to the template so the tamplate can do it's magic
+   */
   public function indexAction() {
   	$this->view->object = jcms\Frontend::getCurrentObject();
   }
 
   // if there is no action for the gives contenttype, call the index
   public function __call($functionname, $params) {
-	$this->view->object = jcms\Frontend::getCurrentObject();
-	jcms\Frontend::triggerControllerFunction($this,jcms\Frontend::getCurrentObject());
+    $this->view->object = jcms\Frontend::getCurrentObject();
+    jcms\Frontend::triggerControllerFunction($this,jcms\Frontend::getCurrentObject());
   }
 
-  // this objecttype references to an other url
+  /*
+   * Handles the childreference content type
+   * 
+   * This objecttype references to an other url
+   */
   public function childreferenceAction() {
     $object = Default_Model_Content::getInstanceByPk($this->getRequest()->getParam('id'));
 
@@ -50,6 +58,9 @@ class IndexController extends Zend_Controller_Action {
     }
   }
 
+  /*
+   * Handles the newslist contenttype rendering
+   */
   public function newslistAction() {
     \Zend_Layout::getMvcInstance()->assign('showsubmenu',false);
 
@@ -74,21 +85,10 @@ class IndexController extends Zend_Controller_Action {
     $this->view->object = $object;
   }
 
+  /*
+   * Handles the agenda contenttype rendering
+   */
   public function agendaAction(){
     \Zend_Layout::getMvcInstance()->assign('showsubmenu',false);
   }
-
-  // public function thumbnailAction(){
-  // jcms\Files::serveThumb($this->getRequest()->getParam('id',null),
-// $this->getRequest()->getParam('field',null));
-  // }
-
-  // public function imageAction(){
-  // die('asd');
-  // jcms\Files::serveImage($this->getRequest()->getParam('id',null),
-// $this->getRequest()->getParam('field',null));
-  // }
-
-  // public function publiccontentAction(){
-  // }
 }

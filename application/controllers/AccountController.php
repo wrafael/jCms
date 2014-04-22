@@ -13,12 +13,18 @@
  */
 class AccountController extends Zend_Controller_Action {
 
+  /**
+   * initiates the controller
+   */
   public function init() {
     Zend_Auth::getInstance()->setStorage(new Zend_Auth_Storage_Session(jcms\Auth::SESSION_FRONTEND_USER));
     jcms\Frontend::initFrontend($this);
     jcms\Frontend::putMenuInLayout($this->getRequest()->getParam('id'));
   }
 
+  /**
+   * Default action to be called.
+   */
   public function indexAction() {
 
     $session = new \Zend_Session_Namespace(jcms\Auth::SESSION_FRONTEND_USER);
@@ -30,6 +36,9 @@ class AccountController extends Zend_Controller_Action {
     $this->_helper->viewRenderer('account/account',null,true);
   }
 
+  /**
+   * Register teacher page
+   */
   public function registerteacherAction(){
   	$form = jcms\FormsHelper::getRegisterForm('/account/registerteacher', true);
   	
@@ -79,6 +88,9 @@ class AccountController extends Zend_Controller_Action {
   	$this->view->registerForm = $form;
   }
   
+  /**
+   * Register a new user
+   */
   public function registerAction() {
   	$form = jcms\FormsHelper::getRegisterForm('/account/register', false);
   	
@@ -130,14 +142,22 @@ class AccountController extends Zend_Controller_Action {
   	$this->view->registerForm = $form;
   }
 
+  /**
+   * The action called after registration.
+   */
   public function successAction() {
   }
 
+  /**
+   * Signon page
+   */
   public function signonAction(){
     Zend_Auth::getInstance()->setStorage(new Zend_Auth_Storage_Session(jcms\Auth::SESSION_BACKEND_USER));
-
   }
 
+  /**
+   * Logges the user out and redirects to the login page
+   */
   public function logoutAction() {
     // i kind of expected clearitentity to work, but since i work with storage
     // to seporate backend from frontend it did not work, with set storage it
@@ -150,6 +170,11 @@ class AccountController extends Zend_Controller_Action {
     $this->_helper->redirector('login');
   }
 
+  /**
+   * Login page
+   * 
+   * If it get's a POST submit, it handles it to make a login possible
+   */
   public function loginAction() {
     $form = jcms\FormsHelper::getLoginForm($this->getRequest());
     $form->setAction('/account/login');

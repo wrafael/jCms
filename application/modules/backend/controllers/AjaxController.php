@@ -1,8 +1,11 @@
 <?php
-//use jcms\FormsHelper;
-
+/**
+ * This controller is used for a set of ajax calls made from the backend of jCms
+ */
 class Backend_AjaxController extends Zend_Controller_Action {
-
+  /**
+   * initiates the controller
+   */
   public function init() {
     Zend_Auth::getInstance()->setStorage(new Zend_Auth_Storage_Session(jcms\Auth::SESSION_BACKEND_USER));
 
@@ -21,10 +24,19 @@ class Backend_AjaxController extends Zend_Controller_Action {
     }
   }
 
+  /**
+   * Action to render tinymceimages
+   * Action does nothing
+   */
   public function tinymceimagesAction(){
 
   }
 
+  /**
+   * Reloads the tree
+   * 
+   * @return JSON string of the content tree
+   */
   public function reloadtreeAction() {
     $this->_helper->layout->disableLayout();
     $this->_helper->viewRenderer->setNoRender(true);
@@ -35,15 +47,15 @@ class Backend_AjaxController extends Zend_Controller_Action {
     exit();
   }
 
+  /**
+   * Removes a tree part
+   */
   public function removeAction() {
 
     $this->layout->setLayout('ajax');
     $id = $this->getRequest()->getParam('id',0);
     $parent = $this->getRequest()->getParam('parent',0);
     $content = Default_Model_Content::getInstanceByPk($id);
-
-//     $children = $content->getChildren();
-
     if($content->getChildren()){
       $this->view->assign('content',0);
     }else{
@@ -66,9 +78,6 @@ class Backend_AjaxController extends Zend_Controller_Action {
 
     $target = Default_Model_Content::getInstanceByPk($targetId);
     $moved = Default_Model_Content::getInstanceByPk($movedId);
-
-
-
 
     $tree = jcms\Tree::getInstance();
 
@@ -158,6 +167,9 @@ class Backend_AjaxController extends Zend_Controller_Action {
     $this->_helper->viewRenderer->setNoRender(true);
   }
 
+  /*
+   * This action removes a objecttypefield based on the objecttypefield_id in the request
+   */
   public function removecontenttypefieldAction(){
     if($this->getRequest()->getParam('objecttypefield_id',null)){
       $objecttypefield = Default_Model_Objecttypefield::getInstanceByPk($this->getRequest()->getParam('objecttypefield_id',null));
@@ -168,6 +180,9 @@ class Backend_AjaxController extends Zend_Controller_Action {
     $this->_helper->viewRenderer->setNoRender(true);
   }
 
+  /*
+   * This action adds a objecttypefield
+   */
   public function addobjecttypefieldAction(){
 
     $objecttypeId = $this->getRequest()->getParam('objecttype_id',null);
@@ -189,6 +204,9 @@ class Backend_AjaxController extends Zend_Controller_Action {
     $this->_helper->viewRenderer->setNoRender(true);
   }
 
+  /**
+   * This action shows the objecttype edit pop-up
+   */
   public function objecttypefieldsAction(){
     $objecttypeId = $this->getRequest()->getParam('id',null);
     if(!$objecttypeId) exit;

@@ -1,10 +1,20 @@
 <?php
+/**
+ * PDO helper for jCms.
+ * 
+ * Bridge between PDO and jCms configuration
+ */
 namespace jcms;
 
 class PDOHelper {
 
   private static $connection;
 
+  /**
+   * Builds a connection with PDO based on the jCms configuration settings
+   * 
+   * @return PDO
+   */
   public static function getConnection()
   {
     if (!isset(self::$connection)) {

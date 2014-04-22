@@ -1,4 +1,7 @@
 <?php
+/**
+ * This is a little halper class to generate funny quotes instead of errors
+ */
 namespace jcms;
 
 class ErrorHelper {

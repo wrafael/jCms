@@ -1,4 +1,9 @@
 <?php
+/**
+ * This class handles all the tree related stuff.
+ * 
+ * Builds the tre ein memory and uses it for jCms.
+ */
 namespace jcms;
 
 class Tree

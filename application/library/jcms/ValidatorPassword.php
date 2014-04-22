@@ -1,4 +1,7 @@
 <?php
+/**
+ * Custom validator for password based on the Zend validator
+ */
 namespace jcms;
 
 class ValidatorPassword extends \Zend_Validate_Abstract

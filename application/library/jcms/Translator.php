@@ -1,8 +1,17 @@
 <?php
+/**
+ * This is ths jCms translator.
+ */
 namespace jcms;
 
 class Translator {
 
+  /**
+   * Translates a string
+   * 
+   * @param string $code
+   * @return string Translated
+   */
   public static function tr($code) {
     $registry = \Zend_Registry::getInstance();
     $retrieved = $registry->translator->_($code);
@@ -23,6 +32,13 @@ class Translator {
     }
   }
 
+  /**
+   * Translates and outputs a string
+   * 
+   * This is a wrappper so you won't need to echo everything you translate in the templates.
+   * 
+   * @param string $code
+   */
   public static function t($code) {
     echo self::tr($code);
   }

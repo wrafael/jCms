@@ -274,6 +274,7 @@ class Default_Model_Content extends Zend_Acl implements Zend_Acl_Resource_Interf
   }
 
   /**
+   * Get's a unique id string for the users permissions
    *
    * @return string
    */

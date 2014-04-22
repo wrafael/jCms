@@ -1,4 +1,7 @@
 <?php
+/**
+ * Function holder for Model related functions
+ */
 namespace jcms;
 
 class ModelHelper

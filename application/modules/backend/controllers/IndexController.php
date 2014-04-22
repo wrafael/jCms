@@ -1,5 +1,7 @@
 <?php
-
+/**
+ * This is the default backend controller. It handles a lot of backend actions.
+ */
 use jcms\PDOHelper;
 
 class Backend_IndexController extends Zend_Controller_Action {
@@ -47,30 +49,6 @@ class Backend_IndexController extends Zend_Controller_Action {
 
     $this->layout->assign('menu',$menu);
   }
-  
-  // this is a copy from iframe controller
-//   public function init() {
-//     Zend_Auth::getInstance()->setStorage(new Zend_Auth_Storage_Session(jcms\Auth::SESSION_BACKEND_USER));
-  
-//     $register = Zend_Registry::getInstance();
-//     $register->settings = $this->getInvokeArg('bootstrap')->getOptions();
-//     $register->request = $this->getRequest();
-//     $register->session = new \Zend_Session_Namespace(jcms\Auth::SESSION_BACKEND_USER);
-//     $this->em = $register->entitymanager;
-//     $this->cache = $register->cache;
-//     $this->layout = Zend_Layout::getMvcInstance();
-  
-//     $this->layout->setLayout('backend_iframe');
-  
-//     // check if the user is logged in, if not, redirect the user to the
-//     // login page
-//     if(! Zend_Auth::getInstance()->hasIdentity()){
-//       throw new Zend_Exception(jcms\Translator::tr('NOT_LOGGED_IN'));
-//     }
-  
-//     $userSession = new \Zend_Session_Namespace(jcms\Auth::SESSION_BACKEND_USER);
-//     $this->user = $userSession->object;
-//   }
 
   public function importAction(){
 
@@ -125,10 +103,6 @@ class Backend_IndexController extends Zend_Controller_Action {
 
   public function roleAction() {
     if(Zend_Registry::getInstance()->session->user->hasRole('God')){
-
-      // $this->view->form = jcms\FormsHelper::getFormRole(new
-      // Default_Model_Role());
-
       $this->view->roles = Default_Model_Role::getAllRoles();
     }
   }

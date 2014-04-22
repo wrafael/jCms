@@ -1,8 +1,12 @@
 <?php
-//use jcms\FormsHelper;
-
+/**
+ * All the actions in this controller will be rendered with a clean template.
+ */
 class Backend_CleanController extends Zend_Controller_Action {
 
+  /**
+   * initiates the controller
+   */
   public function init() {
     Zend_Auth::getInstance()->setStorage(new Zend_Auth_Storage_Session(jcms\Auth::SESSION_BACKEND_USER));
 
@@ -16,17 +20,25 @@ class Backend_CleanController extends Zend_Controller_Action {
     $this->layout->setLayout('ajax');
   }
 
+  /**
+   * Get's a list of images for the backend wysiwyg editor
+   */
   public function tinymceimagesAction(){
     $this->view->assign('files',$this->getTinyMceList('image'));
   }
 
+  /**
+   * Get's a list of links for the backend wysiwyg editor
+   */
   public function tinymcelinksAction(){
     $this->view->assign('files',$this->getTinyMceList('file'));
   }
 
   /**
-   *
-   * @param String $type
+   * Get's a list of files
+   * 
+   * @param String Fieldtype
+   * @return array list of files
    */
   private function getTinyMceList($type){
 

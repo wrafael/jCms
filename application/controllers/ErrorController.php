@@ -1,7 +1,12 @@
 <?php
-
+/**
+ * This controller is used/called when the system has to show something in case of an error
+ */
 class ErrorController extends Zend_Controller_Action {
 
+  /**
+   * Does error handling for the user, also sends the errors to the admin.
+   */
   public function errorAction() {
     $this->layout = Zend_Layout::getMvcInstance();
     $this->layout->setLayout('error');
